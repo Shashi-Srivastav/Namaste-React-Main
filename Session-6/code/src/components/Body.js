@@ -23,13 +23,14 @@ const Body = () => {
     setIsLoaded(false);
     try {
       const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=27.8973944&lng=78.0880129&page_type=DESKTOP_WEB_LISTING"
+        "https://www.swiggy.com/mapi/homepage/getCards?lat=19.0759837&lng=72.8776559"
       );
       const json = await data.json();
-      setRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      setCrouselCards(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      console.log(json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle?.restaurants)
+      setRestaurants(json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
+      setCrouselCards(json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
       setIsLoaded(true);
-      setActualData(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setActualData(json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
     } catch (error) {
       console.log(error);
     }
@@ -48,8 +49,8 @@ const Body = () => {
               <img
                 className="crousel-image"
                 src={
-                  "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/" +
-                  card?.data?.creativeId
+                  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_264,h_288,c_fill" +
+                  card?.info
                 }
               />
             </div>
